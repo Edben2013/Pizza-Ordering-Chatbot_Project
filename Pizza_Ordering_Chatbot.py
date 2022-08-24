@@ -11,53 +11,70 @@ if userName.lower() == "edward morris":
 else:
     print("Hello, " + userName + ". Thanks for ordering your pizza with us!")
 
-size = input("\nWhat size do you want? Enter small, medium, or large:  ").lower()
+keepGoing = "y"
+while keepGoing.lower() == "y":
 
-while size != "small" and size != "medium" and size != "large":
-    size = input("Invalid value. Please enter small, medium, or large to continue.: ").lower()
 
-flavor = input("\nEnter the flavor of pizza:  ")
+    size = input("\nWhat size do you want? Enter small, medium, or large:  ").lower()
 
-while (len(flavor) == 0):
-    flavor = input("Flavor of pizza is missing. Please enter pizza flavor to continue.: ")
+    while size != "small" and size != "medium" and size != "large":
+        size = input("Invalid value. Please enter small, medium, or large to continue.: ").lower()
 
-crustType = input("\nWhat type of crust do you want:  ")
+    flavor = input("\nEnter the flavor of pizza:  ")
 
-while (len(crustType) == 0):
-    crustType = input("Pizza crust type is missing. Please enter pizza crust type to continue.: ")
+    while (len(flavor) == 0):
+        flavor = input("Flavor of pizza is missing. Please enter pizza flavor to continue.: ")
 
-quantity = input("\nHow many of these do you want to order:  ")
+    crustType = input("\nWhat type of crust do you want:  ")
 
-while not quantity.isdigit():
-    quantity = input("\nValue not recognized. Please enter a numeric value: ")
+    while (len(crustType) == 0):
+        crustType = input("Pizza crust type is missing. Please enter pizza crust type to continue.: ")
 
-quantity = int(quantity)
+    quantity = input("\nHow many of these do you want to order:  ")
 
-method = input("\nIs this carry out or delivery:  ").lower()
+    while not quantity.isdigit():
+        quantity = input("\nValue not recognized. Please enter a numeric value: ")
 
-while method != "delivery" and method != "carry out" and method != "carryout":
-    method = input("Invalid value. Please enter carry out or delivery to continue.: ").lower()
+    quantity = int(quantity)
 
-salesTax = 1.1
+    method = input("\nIs this carry out or delivery:  ").lower()
 
-if size.lower() == "small":
-    pizzaCost = 8.99
-elif size.lower() == "medium":
-    pizzaCost = 14.99
-elif size.lower() == "large":
-    pizzaCost = 17.99
+    while method != "delivery" and method != "carry out" and method != "carryout":
+        method = input("Invalid value. Please enter carry out or delivery to continue.: ").lower()
 
-if method.lower() == "delivery":
-    deliveryFee = 5
-else:
-    deliveryFee = 0
+    salesTax = 1.1
 
-total = (pizzaCost * quantity) * salesTax + deliveryFee
-print("\n----------------")
-print("Thank you,", userName, ", for your order.")
-print("Your", quantity, size, flavor, "pizza with", crustType,"crust costs", "${:,.2f}".format(total) + ".")
-if total >= 50:
-    print("\nCongraduations, you've been awared a $10 off coupon for your next order!")
-else:
-    print("\nOrders over $50 will receive a free $10 off coupon!")
-print("----------------")
+    if size.lower() == "small":
+        pizzaCost = 8.99
+    elif size.lower() == "medium":
+        pizzaCost = 14.99
+    elif size.lower() == "large":
+        pizzaCost = 17.99
+
+    if method.lower() == "delivery":
+        deliveryFee = 5
+    else:
+        deliveryFee = 0
+
+    total = (pizzaCost * quantity) * salesTax + deliveryFee
+    print("\n----------------")
+    print("Thank you,", userName, ", for your order.")
+    print("Your", quantity, size, flavor, "pizza with", crustType,"crust costs", "${:,.2f}".format(total) + ".")
+    if total >= 50:
+        print("\nCongraduations, you've been awared a $10 off coupon for your next order!")
+    else:
+        print("\nOrders over $50 will receive a free $10 off coupon!")
+    print("----------------")
+
+    print("Order has been received. ETA 3 mins!")
+
+    for min in range(3, 1, -1):
+        print(min, "minutes remaining")
+        for seconds in range(60, 0, -1):
+            print(seconds, end = " \r")
+            import time
+            time.sleep(1)
+    print("Order is ready!")
+
+    keepGoing = input("Do you want to place another order? Enter y or n:  ")
+
